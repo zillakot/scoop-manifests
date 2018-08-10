@@ -1,0 +1,29 @@
+{
+    "homepage": "https://drill.apache.org/",
+    "description": "Schema-free SQL Query Engine for Hadoop, NoSQL and Cloud Storage",
+    "version": "1.14.0",
+    "license": "Apache-2.0",
+    "url": "http://www-eu.apache.org/dist/drill/drill-1.14.0/apache-drill-1.14.0.tar.gz",
+    "hash": "sha512:53fa8f13dc33c65366af15b9bc2dd8967e7663139bca4d56c8ac99d7f813c003a1311e9959d2c2c5d69979286b838088a0c36d4745b28ec5619033bd22f391ff",
+    "extract_dir": "apache-drill-1.14.0",
+    "bin": [
+        "bin/sqlline.bat",
+        [
+            "bin/sqlline.bat",
+            "drill-embedded",
+            "-u '\"jdbc:drill:zk=local\"'"
+        ]
+    ],
+    "post_install": "(Get-Content $dir/bin/sqlline.bat).replace('%~dp0', $dir+'\\bin').replace('%cd%', $dir) | Set-Content $dir/bin/sqlline.bat",
+    "checkver": {
+        "url": "https://drill.apache.org/docs/release-notes/",
+        "re": "Apache Drill ([\\d.]+)"
+    },
+    "autoupdate": {
+        "url": "http://www-eu.apache.org/dist/drill/drill-$version/apache-drill-$version.tar.gz",
+        "extract_dir": "apache-drill-$version",
+        "hash": {
+            "url": "$url.sha512"
+        }
+    }
+}
